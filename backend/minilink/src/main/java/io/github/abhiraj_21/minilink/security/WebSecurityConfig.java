@@ -29,11 +29,12 @@ public class WebSecurityConfig {
         return new JwtAuthenticationFilter();
     }
 
+    @Bean
     public PasswordEncoder passwordEncoder(){
         return new BCryptPasswordEncoder();
     }
 
-
+    @Bean
     public DaoAuthenticationProvider authenticationProvider(){
         DaoAuthenticationProvider authProvider = new DaoAuthenticationProvider();
         authProvider.setUserDetailsService(userDetailsService);
@@ -41,6 +42,7 @@ public class WebSecurityConfig {
         return authProvider;
     }
 
+    @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception{
         http.csrf(csrf -> csrf.disable())
                 .authorizeHttpRequests(auth -> auth
@@ -51,7 +53,7 @@ public class WebSecurityConfig {
                 );
 
         http.authenticationProvider(authenticationProvider());
-        
+
         //This will make sure our custom jwtAuthenticationFilter is called before the UsernamePasswordAuthenticationFilter
         http.addFilterBefore(jwtAuthenticationFilter(), UsernamePasswordAuthenticationFilter.class);
 
