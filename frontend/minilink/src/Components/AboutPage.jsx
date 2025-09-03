@@ -1,5 +1,6 @@
 import React from 'react'
-import {FaLink, FaShareAt, FaEdit, FaChartLine} from "react-icons/fa6"
+import {FaChartLine, FaLink} from "react-icons/fa6"
+import {FaEdit, FaShareAlt} from "react-icons/fa";
 
 const AboutPage = () => {
     return (
@@ -15,6 +16,47 @@ const AboutPage = () => {
                 <div className="space-y-5 xl:w-[60%] lg:w-[70%] md:w-[80%] w-full">
                     <div className="flex items-start">
                         <FaLink className="text-blue-500 text-3xl mr-4" />
+                        <div>
+                            <h2 className="sm:text-2xl font-bold text-slate-800">
+                                Simple URL Shortening
+                            </h2>
+                            <p className="text-gray-700">
+                                Users can input a long URL and receive a shortened version that is easy to share.
+                            </p>
+                        </div>
+                    </div>
+                    <div className="flex items-start">
+                        <FaShareAlt className="text-green-500 text-3xl mr-4" />
+                        <div>
+                            <h2 className="sm:text-2xl font-bold text-slate-800">
+                                Powerful Analytics
+                            </h2>
+                            <p className="text-gray-700">
+                                MiniLink provides detailed analytics on link usage, including click counts, geographic data, and referral sources.
+                            </p>
+                        </div>
+                    </div>
+                    <div className="flex items-start">
+                        <FaEdit className="text-purple-500 text-3xl mr-4" />
+                        <div>
+                            <h2 className="sm:text-2xl font-bold text-slate-800">
+                                Enhanced Security
+                            </h2>
+                            <p className="text-gray-700">
+                                MiniLink includes features to protect against spam and malicious links, ensuring a safe experience for users.
+                            </p>
+                        </div>
+                    </div>
+                    <div className="flex items-start">
+                        <FaChartLine className="text-red-500 text-3xl mr-4" />
+                        <div>
+                            <h2 className="sm:text-2xl font-bold text-slate-800">
+                                Fast and Reliable
+                            </h2>
+                            <p className="text-gray-700">
+                                The service is optimized for speed and reliability, ensuring that shortened links are always accessible.
+                            </p>
+                        </div>
                     </div>
 
                 </div>
