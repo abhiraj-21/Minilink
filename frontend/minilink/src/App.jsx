@@ -1,12 +1,18 @@
 import './App.css'
+import {BrowserRouter, Route, Routes} from "react-router-dom";
+import LandingPage from "./Components/LandingPage.jsx";
+import AboutPage from "./Components/AboutPage.jsx";
 
 function App() {
 
   return (
     <>
-      <div className="bg-indigo-300">
-          <h1 className="font-bold text-2xl underline">Hello World!</h1>
-      </div>
+        <BrowserRouter>
+            <Routes>
+                <Route path="/" element={<LandingPage />} />
+                <Route path="/about" element={<AboutPage />} />
+            </Routes>
+        </BrowserRouter>
     </>
   )
 }

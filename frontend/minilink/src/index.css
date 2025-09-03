@@ -1,1 +1,54 @@
+@import url("https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap");
+
 @import "tailwindcss";
+
+@theme{
+    /*Background Colors*/
+    --bg-custom-gradient: linear-gradient(to right, #bedbff, #a2f4fd);
+    --bg-custom-gradient-2: linear-gradient(to left, #c4b4ff, #dab2ff);
+    --bg-card-gradient: linear-gradient(to right, #a3b3ff, #8ec5ff);
+
+    /*Text Colors*/
+    --color-navbarColor: #2C3E50;
+    --color-btnColor: #0034d7;
+    --color-linkColor: #2a5bd7;
+
+    /*Box Shadows*/
+    --shadow-custom: 0 0 15px rgba(0, 0, 0, 0.3);
+    --shadow-right: 10px 0px 10px -5px rgba(0, 0, 0, 0.3);
+
+    /*Fonts*/
+    --font-roboto: "Roboto", sans-serif;
+    --font-montserrat: "Montserrat", sans-serif;
+
+}
+
+.bg-custom-gradient {
+    background-image: var(--bg-custom-gradient);
+}
+
+.bg-custom-gradient-2{
+    background-image: var(--bg-custom-gradient-2);
+}
+
+.bg-card-gradient{
+    background-image: var(--bg-card-gradient);
+}
+
+.shadow-custom {
+    box-shadow: var(--shadow-custom);
+}
+
+.shadow-right {
+    box-shadow: var(--shadow-right);
+}
+
+/*.font-roboto {*/
+/*    font-family: var(--font-roboto);*/
+/*}*/
+
+/*.font-montserrat {*/
+/*    font-family: var(--font-montserrat);*/
+/*}*/
+
