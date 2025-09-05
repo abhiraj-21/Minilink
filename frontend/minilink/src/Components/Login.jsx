@@ -31,7 +31,7 @@ const Login = () => {
             localStorage.setItem("JWT_TOKEN", JSON.stringify(response.token))
             reset()
 
-            navigate("/")
+            navigate("/dashboard")
             toast.success("Login successful.")
         }catch (error){
             console.log(error)
