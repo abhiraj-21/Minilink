@@ -2,16 +2,20 @@ import React, { useState } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { IoIosMenu } from "react-icons/io";
 import { RxCross2 } from "react-icons/rx";
+import {useStoreContext} from "../contextApi/ContextApi.jsx";
 
 
 const Navbar = () => {
     const navigate = useNavigate();
     const path = useLocation().pathname;
     const [navbarOpen, setNavbarOpen] = useState(false);
+    const {authenticated, setAuthenticated} = useStoreContext()
 
     const onLogOutHandler = () => {
         localStorage.removeItem("JWT_TOKEN");
         navigate("/login");
+        setAuthenticated(false)
+        console.log(authenticated)
     };
 
     return (
@@ -58,15 +62,16 @@ const Navbar = () => {
                         </Link>
                     </li>
                     <Link to="/register">
-                        <li className=" sm:ml-0 -ml-1 bg-sky-600 text-white  cursor-pointer w-24 text-center font-semibold px-2 py-2 rounded-md  hover:text-slate-300   transition-all duration-150">
+                        {!authenticated && <li
+                            className=" sm:ml-0 -ml-1 bg-sky-600 text-white  cursor-pointer w-24 text-center font-semibold px-2 py-2 rounded-md  hover:text-slate-300   transition-all duration-150">
                             SignUp
-                        </li>
+                        </li>}
                     </Link>
-                    {/*<button*/}
-                    {/*    onClick={onLogOutHandler}*/}
-                    {/*    className="sm:ml-0 -ml-1 bg-rose-700 text-white  cursor-pointer w-24 text-center font-semibold px-2 py-2 rounded-md  hover:text-slate-300   transition-all duration-150">*/}
-                    {/*    LogOut*/}
-                    {/*</button>*/}
+                    {authenticated && <button
+                        onClick={onLogOutHandler}
+                        className="sm:ml-0 -ml-1 bg-sky-600 text-white  cursor-pointer w-24 text-center font-semibold px-2 py-2 rounded-md  hover:text-slate-300   transition-all duration-150">
+                        LogOut
+                    </button>}
                 </ul>
                 <button
                     onClick={() => setNavbarOpen(!navbarOpen)}

@@ -1,9 +1,10 @@
-import React from 'react'
 import { motion } from "framer-motion";
 import Card from "./Card.jsx";
+import {useStoreContext} from "../contextApi/ContextApi.jsx";
 
 const LandingPage = () => {
-
+    const {token} = useStoreContext()
+    console.log("Token from landing page " + token)
     function dashBoardNavigateHandler() {
 
     }

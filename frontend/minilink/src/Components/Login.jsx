@@ -4,11 +4,12 @@ import TextField from "./TextField.jsx";
 import {Link, useNavigate} from "react-router-dom";
 import api from "../api/api.js";
 import toast from "react-hot-toast";
+import {useStoreContext} from "../contextApi/ContextApi.jsx";
 
 const Login = () => {
 
     const [loader, setLoader] = useState(false);
-
+    const {setToken, setAuthenticated} = useStoreContext()
     const navigate = useNavigate()
 
     const {register, handleSubmit, formState:{errors}, reset}
@@ -24,13 +25,17 @@ const Login = () => {
         try{
             const {data : response} = await api.post("/api/auth/public/login", data)
             console.log(response)
+            setToken(response.token)
+            setAuthenticated(true)
             //Store token in local storage
             localStorage.setItem("JWT_TOKEN", JSON.stringify(response.token))
             reset()
+
             navigate("/")
             toast.success("Login successful.")
         }catch (error){
             console.log(error)
+            setAuthenticated(false)
             toast.error("Login failed. Please try again.")
         }finally{
             setLoader(false)
@@ -77,7 +82,7 @@ const Login = () => {
 
                 <p className="text-center text-sm mt-4 text-slate-600">
                     Don't have an account yet?
-                    <Link to={"/login"}>
+                    <Link to={"/register"}>
                         <span className="text-btnColor underline hover:cursor-pointer ">Sign Up</span>
                     </Link>
                 </p>
