@@ -1,11 +1,15 @@
 import React, {useState} from 'react'
 import {useForm} from "react-hook-form";
 import TextField from "./TextField.jsx";
-import {Link} from "react-router-dom";
+import {Link, useNavigate} from "react-router-dom";
+import api from "../api/api.js";
+import toast from "react-hot-toast";
 
 const RegisterPage = () => {
 
     const [loader, setLoader] = useState(false);
+
+    const navigate = useNavigate()
 
     const {register, handleSubmit, formState:{errors}, reset}
         = useForm({
@@ -16,8 +20,20 @@ const RegisterPage = () => {
         }, mode: "onTouched"
     })
 
-    const registerHandler = (data) => {
-        setLoader(true)
+    const registerHandler = async (data) => {
+        setLoader(true);
+        try{
+            const {data : response} = await api.post("/api/auth/public/register", data)
+            console.log(response)
+            reset()
+            navigate("/login")
+            toast.success("Registration successful. Please login.")
+        }catch (error){
+            console.log(error)
+            toast.error("Registration failed. Please try again.")
+        }finally{
+            setLoader(false)
+        }
     }
 
     return (
