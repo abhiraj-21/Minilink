@@ -1,12 +1,14 @@
 import React, {useState} from 'react'
 import Graph from "./Graph.jsx";
 import {useStoreContext} from "../../contextApi/ContextApi.jsx";
-import {useFetchTotalClicks} from "../../hooks/useQuery.js";
+import {useFetchMyShortUrls, useFetchTotalClicks} from "../../hooks/useQuery.js";
 import ShortenPopup from "./ShortenPopup.jsx";
+import {FaLink} from "react-icons/fa6";
+import ShortenUrlList from "./ShortenUrlList.jsx";
 
 const DashboardLayout = () => {
     const {token} = useStoreContext();
-    const refetch = false
+    // const refetch = false
     const [shortenPopUp, setShortenPopUp] = useState(false)
 
     function onError() {
@@ -14,6 +16,7 @@ const DashboardLayout = () => {
     }
 
     const {isPending: loader, data: totalClicks} = useFetchTotalClicks(token, onError)
+    const {isPending, data: myShortenUrls = [], refetch} = useFetchMyShortUrls(token, onError)
 
     return (
         <div className="lg:px-14 sm:px-8 px-4 min-h-[calc(100vh-64px)]">
@@ -38,6 +41,22 @@ const DashboardLayout = () => {
                             Create a New Short URL
                         </button>
                     </div>
+
+                    <div>
+                        {!isPending && myShortenUrls.length === 0 ? (
+                            <div className="flex justify-center pt-16">
+                                <div className="flex gap-2 items-center justify-center  py-6 sm:px-8 px-5 rounded-md   shadow-lg  bg-gray-50">
+                                    <h1 className="text-slate-800 font-montserrat   sm:text-[18px] text-[14px] font-semibold mb-1 ">
+                                        You haven't created any short link yet
+                                    </h1>
+                                    <FaLink className="text-blue-500 sm:text-xl text-sm " />
+                                </div>
+                            </div>
+                        ) : (
+                            <ShortenUrlList data={myShortenUrls} />
+                        )}
+                    </div>
+
                 </div>
             )}
 
