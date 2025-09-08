@@ -4,6 +4,8 @@ import io.github.abhiraj_21.minilink.Service.UserDetailsServiceImpl;
 import io.github.abhiraj_21.minilink.security.jwt.JwtAuthenticationFilter;
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
@@ -29,9 +31,10 @@ import static org.springframework.security.config.Customizer.withDefaults;
 @EnableWebSecurity
 @EnableMethodSecurity
 @Data
-@AllArgsConstructor
+//@AllArgsConstructor
 public class WebSecurityConfig {
 
+    @Autowired
     private UserDetailsServiceImpl userDetailsService;
 
     @Bean
@@ -76,11 +79,13 @@ public class WebSecurityConfig {
         return http.build();
     }
 
+    @Value("${frontend.url}")
+    String frontEndUrl;
 
     @Bean
     public CorsConfigurationSource corsConfigurationSource() {
         CorsConfiguration config = new CorsConfiguration();
-        config.setAllowedOrigins(List.of("http://localhost:5173"));
+        config.setAllowedOrigins(List.of(frontEndUrl));
         config.setAllowedMethods(List.of("GET", "POST", "PUT", "DELETE", "OPTIONS"));
         config.setAllowedHeaders(List.of("*"));
         config.setAllowCredentials(true);
