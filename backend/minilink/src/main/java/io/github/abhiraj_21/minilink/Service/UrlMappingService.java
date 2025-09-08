@@ -12,6 +12,7 @@ import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 import java.util.Random;
@@ -78,7 +79,7 @@ public class UrlMappingService {
                     })
                     .collect(Collectors.toList());
         }
-        return null;
+        return Collections.emptyList();
     }
 
     public Map<LocalDate, Long> getTotalClicksByUserAndDate(User user, LocalDate  start, LocalDate end) {

@@ -24,6 +24,13 @@ public class UserService {
     private JwtUtils jwtUtils;
 
     public User registerUser(User user){
+        if(userRepository.existsByUsername(user.getUsername())){
+            throw new RuntimeException("Username is already taken!");
+        }
+        if(userRepository.existsByEmail(user.getEmail())){
+            throw new RuntimeException("Email is already taken!");
+        }
+
         user.setPassword(passwordEncoder.encode(user.getPassword()));
         return userRepository.save(user);
     }
