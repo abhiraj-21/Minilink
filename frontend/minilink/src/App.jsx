@@ -8,22 +8,14 @@ import RegisterPage from "./Components/RegisterPage.jsx";
 import {Toaster} from "react-hot-toast";
 import Login from "./Components/Login.jsx";
 import DashboardLayout from "./Components/Dashboard/DashboardLayout.jsx";
+import {getApps} from "./utils/helper.js";
 
 function App() {
-
+    const CurrentApp = getApps()
   return (
     <>
         <Router>
-            <Navbar />
-            <Toaster position="top-center"/>
-            <Routes>
-                <Route path="/" element={<LandingPage />} />
-                <Route path="/about" element={<AboutPage />} />
-                <Route path="/register" element={<RegisterPage />} />
-                <Route path="/login" element={<Login />} />
-                <Route path="/dashboard" element={<DashboardLayout/>} />
-            </Routes>
-            <Footer />
+            <CurrentApp />
         </Router>
     </>
   )

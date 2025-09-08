@@ -34,7 +34,7 @@ const ShortenItem = ({ originalUrl, shortUrl, clickCount, createdDate }) => {
     const fetchMyShortUrl = async () => {
         setLoader(true);
         try {
-            const { data } = await api.get(`/api/urls/analytics/${selectedUrl}?startDate=2025-12-01T00:00:00&endDate=2026-12-31T23:59:59`, {
+            const { data } = await api.get(`/api/urls/analytics/${selectedUrl}?startDate=2025-01-01T00:00:00&endDate=2026-12-31T23:59:59`, {
                 headers: {
                     "Content-Type": "application/json",
                     Accept: "application/json",
@@ -97,7 +97,7 @@ const ShortenItem = ({ originalUrl, shortUrl, clickCount, createdDate }) => {
                     <div
                         onClick={() => {
                             setIsCopied(true);
-                            setTimeout(() => setIsCopied(false), 2000); // Reset the copied state after 2 seconds
+                            setTimeout(() => setIsCopied(false), 2000);
                         }}
                         className="flex cursor-pointer gap-1 items-center bg-btnColor py-2 font-semibold shadow-md shadow-slate-500 px-6 rounded-md text-white "
                     >
@@ -127,9 +127,7 @@ const ShortenItem = ({ originalUrl, shortUrl, clickCount, createdDate }) => {
                                     visible={true}
                                     height="50"
                                     width="50"
-                                    ariaLabel="ringloader-loading"
-                                    wrapperStyle={{}}
-                                    wrapperClass=""
+                                    aria-label="ringloader-loading"
                                     colors={['#306cce', '#72a1ed']}
                                 />
                                 <p className='text-slate-700'>Please Wait...</p>
