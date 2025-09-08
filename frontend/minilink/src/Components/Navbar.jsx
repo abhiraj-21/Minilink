@@ -9,13 +9,12 @@ const Navbar = () => {
     const navigate = useNavigate();
     const path = useLocation().pathname;
     const [navbarOpen, setNavbarOpen] = useState(false);
-    const {authenticated, setAuthenticated} = useStoreContext()
-
+    // const {authenticated, setAuthenticated} = useStoreContext()
+    const {token, setToken} = useStoreContext()
     const onLogOutHandler = () => {
         localStorage.removeItem("JWT_TOKEN");
+        setToken(null)
         navigate("/login");
-        setAuthenticated(false)
-        console.log(authenticated)
     };
 
     return (
@@ -51,23 +50,25 @@ const Navbar = () => {
                             About
                         </Link>
                     </li>
-                    <li className="hover:text-btnColor font-[500]  transition-all duration-150">
-                        <Link
-                            className={`${
-                                path === "/dashboard" ? "text-slate-800 font-semibold" : "text-slate-600"
-                            }`}
-                            to="/dashboard"
-                        >
-                            Dashboard
-                        </Link>
-                    </li>
+                    {
+                        token && (<li className="hover:text-btnColor font-[500]  transition-all duration-150">
+                            <Link
+                                className={`${
+                                    path === "/dashboard" ? "text-slate-800 font-semibold" : "text-slate-600"
+                                }`}
+                                to="/dashboard"
+                            >
+                                Dashboard
+                            </Link>
+                        </li>)
+                    }
                     <Link to="/register">
-                        {!authenticated && <li
+                        {!token && <li
                             className=" sm:ml-0 -ml-1 bg-sky-600 text-white  cursor-pointer w-24 text-center font-semibold px-2 py-2 rounded-md  hover:text-slate-300   transition-all duration-150">
                             SignUp
                         </li>}
                     </Link>
-                    {authenticated && <button
+                    {token && <button
                         onClick={onLogOutHandler}
                         className="sm:ml-0 -ml-1 bg-sky-600 text-white  cursor-pointer w-24 text-center font-semibold px-2 py-2 rounded-md  hover:text-slate-300   transition-all duration-150">
                         LogOut
@@ -75,8 +76,7 @@ const Navbar = () => {
                 </ul>
                 <button
                     onClick={() => setNavbarOpen(!navbarOpen)}
-                    className="sm:hidden flex items-center sm:mt-0 mt-2"
-                >
+                    className="sm:hidden flex items-center sm:mt-0 mt-2">
                     {navbarOpen ? (
                         <RxCross2 className="text-white text-3xl" />
                     ) : (
