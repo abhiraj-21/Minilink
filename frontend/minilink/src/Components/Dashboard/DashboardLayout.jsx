@@ -5,6 +5,7 @@ import {useFetchMyShortUrls, useFetchTotalClicks} from "../../hooks/useQuery.js"
 import ShortenPopup from "./ShortenPopup.jsx";
 import {FaLink} from "react-icons/fa6";
 import ShortenUrlList from "./ShortenUrlList.jsx";
+import Loader from "../Loader.jsx";
 
 const DashboardLayout = () => {
     const {token} = useStoreContext();
@@ -20,7 +21,7 @@ const DashboardLayout = () => {
 
     return (
         <div className="lg:px-14 sm:px-8 px-4 min-h-[calc(100vh-64px)]">
-            {loader ? (<p>Loading...</p>) : (
+            {loader ? (<Loader />) : (
                 <div className="lg:w-[90%] w-full mx-auto py-16">
                     <div className="h-96 relative">
                         {totalClicks.length === 0 && (
